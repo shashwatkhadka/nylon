@@ -1,3 +1,0 @@
-# Nylon Wears
-
-Semester Project
