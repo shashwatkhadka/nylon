@@ -1,3 +1,3 @@
-# nylon
+# Nylon Wears
 
-read again mandzukic
+Semester Project
