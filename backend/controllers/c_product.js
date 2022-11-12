@@ -9,7 +9,7 @@ exports.getAllproducts=async(req,res)=>{
 
 //search products
 exports.searchProduct=async(req,res)=>{
-    let data =await Product.find({"$or":[{prodname:{$regex:req.params.key}},{description:{$regex:req.params.key}},{category:{$regex:req.params.key}}
+    let data =await Product.find({"$or":[{prodname:{$regex:req.params.key,$options:'i'}},{description:{$regex:req.params.key,$options:'i'}},{category:{$regex:req.params.key,$options:'i'}}
     ]})
 
     res.send(data)
