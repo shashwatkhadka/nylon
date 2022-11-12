@@ -7,6 +7,15 @@ exports.getAllproducts=async(req,res)=>{
     res.status(200).json({success:true,allproducts})
 }
 
+//search products
+exports.searchProduct=async(req,res)=>{
+    let data =await Product.find({"$or":[{prodname:{$regex:req.params.key}},{description:{$regex:req.params.key}},{category:{$regex:req.params.key}}
+    ]})
+
+    res.send(data)
+
+}
+
 //create product
 exports.createproduct=async(req,res,next)=>{
     const product=await Product.create(req.body);
