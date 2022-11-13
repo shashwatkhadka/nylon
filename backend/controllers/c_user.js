@@ -6,8 +6,10 @@ exports.registerUser = async (req, res, next) => {
   const userm=await User.create(req.body);
 
   const token=userm.getJWTToken();//getjWT token for created "user'"
-
-  res.status(201).json({success:true,token, userm})
+  //options for cookie
+  const options={expires:new Date(Date.now()+3*24*60*60*1000),httpOnly:true}
+  //saving in cookie
+  res.status(200).cookie("token",token,options).json({success:true,token,userm})
   
 };
 
@@ -35,7 +37,10 @@ exports.loginUser=async(req,res,next)=>{
   }
 
   const token=userm.getJWTToken();
-  res.status(201).json({success:true,token})
+  //options for cookie
+  const options={expires:new Date(Date.now()+3*24*60*60*1000),httpOnly:true}
+  //saving token in cookie
+  res.status(201).cookie("token",token,options).json({success:true,token,userm})
 
 }
 

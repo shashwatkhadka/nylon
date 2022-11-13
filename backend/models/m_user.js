@@ -54,10 +54,5 @@ const userSchema = new mongoose.Schema({
   };//shashwat is kept in place of secret key, it should be kept in config.env
 
 
-  // Compare Password
-  userSchema.methods.comparePassword = async function (password) {
-    return await bcrypt.compare(password, this.password);//compare(data,encrypted)
-  };//return true/false
-   
   module.exports = mongoose.model("User", userSchema);
   
