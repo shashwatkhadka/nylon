@@ -44,4 +44,18 @@ exports.loginUser=async(req,res,next)=>{
 
 }
 
+//LogOut User
+exports.logoutUser=async(req,res,next)=>{
+
+  res.cookie("token",null,{expires:new Date(Date.now()),httpOnly:true})
+  res.status(200).json({success:true,message:"Logged Out"})
+}
+
+//get user detail
+exports.getuserdetail=async(req,res)=>{
+  const user=await User.findById(req.user.id);
+
+  res.status(200).json({success:true, user})
+}
+
 
