@@ -1,10 +1,23 @@
 const Product=require("../models/m_product")
+const ApiFeature=require("../utils/apifeatures")
 
-//get all product
+//get all product(without result per page limit)
 exports.getAllproducts=async(req,res)=>{
     const allproducts=await Product.find();
 
     res.status(200).json({success:true,allproducts})
+}
+
+//pagination
+exports.getpagination_products=async(req,res)=>{
+    const resultPerPage=3;
+    const productCount=await Product.countDocuments();
+
+    const apiFeature=new ApiFeature(Product.find(),req.query).pagination(resultPerPage)
+    
+    const pagination_products=await apiFeature.query;
+
+    res.status(200).json({success:true,pagination_products,productCount})
 }
 
 //search products
